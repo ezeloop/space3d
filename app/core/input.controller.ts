@@ -1,25 +1,29 @@
 export class InputController {
-    private keys: { [key: string]: boolean} = {}
+  private keys: { [key: string]: boolean } = {};
 
-    constructor() {
-        this.listenToEvents();
-    }
+  constructor() {
+    this.listenToEvents();
+  }
 
-    public isPressed(keyCode: string): boolean {
-        return !!this.keys[keyCode]
-    }
+  public isPressed(keyCode: string): boolean {
+    return !!this.keys[keyCode];
+  }
 
-    private onKeyDown(event: KeyboardEvent): void {
-        this.keys[event.code] = true;
-        console.log(`Key down: ${event.code}`);
-    }
+  private onKeyDown(event: KeyboardEvent): void {
+    this.keys[event.code] = true;
+    console.log(`Key down: ${event.code}`);
+  }
 
-    private onKeyUp(event: KeyboardEvent): void {
-        this.keys[event.code] = false;
-    }
+  public setKey(keyCode: string, pressed: boolean): void {
+    this.keys[keyCode] = pressed;
+  }
 
-    private listenToEvents(): void {
-        window.addEventListener("keydown", this.onKeyDown.bind(this));
-        window.addEventListener("keyup", this.onKeyUp.bind(this));
-}
+  private onKeyUp(event: KeyboardEvent): void {
+    this.keys[event.code] = false;
+  }
+
+  private listenToEvents(): void {
+    window.addEventListener("keydown", this.onKeyDown.bind(this));
+    window.addEventListener("keyup", this.onKeyUp.bind(this));
+  }
 }

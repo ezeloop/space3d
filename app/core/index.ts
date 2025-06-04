@@ -9,6 +9,7 @@ import { Spaceship } from "./spaceship";
 import { InputController } from "./input.controller";
 import { Starfield } from "./starfield";
 import { CameraController } from "./CameraController";
+import { TouchController } from "./TouchController";
 
 export class App {
   private declare static instance: App;
@@ -27,6 +28,7 @@ export class App {
     1000
   );
   private readonly inputController = new InputController();
+  private readonly touchController = new TouchController(this.inputController);
   private readonly spaceship = new Spaceship(
     this.scene,
     this.inputController,
@@ -46,11 +48,11 @@ export class App {
   }
 
   public static start(): void {
-    if(App.instance) {
+    if (App.instance) {
       return;
     }
     App.instance = new App();
-}
+  }
 
   private createInstances(): void {
     this.spaceship.loadModel();
